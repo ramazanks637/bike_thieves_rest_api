@@ -7,8 +7,6 @@ namespace bike_thieves
 {
     class Program
     {
-
-
         static async Task GetItemAsync(string location,string distance,string stolenness)
         {
             using (var client = new HttpClient())
@@ -17,20 +15,23 @@ namespace bike_thieves
                 HttpResponseMessage response = await client.GetAsync(client.BaseAddress);
                 if (response.IsSuccessStatusCode)
                 {
-                    Bike item = new Bike();
-                    item = await JsonSerializer.DeserializeAsync<Bike>(await response.Content.ReadAsStreamAsync());
-                    Console.WriteLine($"Bike Id    : {item.id}");
-                    Console.WriteLine($"Bike Color    : {item.frame_colors}");
-                    Console.WriteLine($"Model      : {item.frame_model}");
-                    Console.WriteLine($"Manufacturer Name      : {item.manufacturer_name}");
-                    Console.WriteLine($"Serial      : {item.serial}");
-                    Console.WriteLine($"Status      : {item.status}");
-                    Console.WriteLine($"Stollen      : {item.stolen}");
-                    Console.WriteLine($"Stollen coordinates     : {item.stolen_coordinates}");
-                    Console.WriteLine($"Stollen Location     : {item.stolen_location}");
-                    Console.WriteLine($"title     : {item.title}");
-                    Console.WriteLine($"Url     : {item.url}");
-                    Console.WriteLine($"year     : {item.year}");
+                    Root itemlist = new Root();
+                    itemlist = await JsonSerializer.DeserializeAsync<Root>(await response.Content.ReadAsStreamAsync());
+                    foreach (Bike item in itemlist.bikes)
+                    {
+                        Console.WriteLine($"Bike Id    : {item.id}");
+                        Console.WriteLine($"Bike Color    : {item.frame_colors}");
+                        Console.WriteLine($"Model      : {item.frame_model}");
+                        Console.WriteLine($"Manufacturer Name      : {item.manufacturer_name}");
+                        Console.WriteLine($"Serial      : {item.serial}");
+                        Console.WriteLine($"Status      : {item.status}");
+                        Console.WriteLine($"Stollen      : {item.stolen}");
+                        Console.WriteLine($"Stollen coordinates     : {item.stolen_coordinates}");
+                        Console.WriteLine($"Stollen Location     : {item.stolen_location}");
+                        Console.WriteLine($"title     : {item.title}");
+                        Console.WriteLine($"Url     : {item.url}");
+                        Console.WriteLine($"year     : {item.year}");
+                    }
                 }
 
             }
@@ -41,7 +42,6 @@ namespace bike_thieves
             string location = "Amsterdam";
             string distance = "20";
             string stolenness = "proximity";
-
 
             while (true)
             {
