@@ -8,7 +8,7 @@ namespace bike_thieves
 {
     public class Bike
     {
-        public int date_stolen { get; set; }
+        public int? date_stolen { get; set; }
         public string description { get; set; }
         public List<string> frame_colors { get; set; }
         public string frame_model { get; set; }
@@ -28,6 +28,7 @@ namespace bike_thieves
         public string thumb { get; set; }
         public string title { get; set; }
         public string url { get; set; }
-        public int year { get; set; }
+        public int? year { get; set; }
+
     }
 }
