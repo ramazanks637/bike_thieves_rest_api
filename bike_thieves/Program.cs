@@ -8,7 +8,7 @@ namespace bike_thieves
 {
     class Program
     {
-        
+        //deneme
         static void Main(string[] args)
         {
             while (true)
